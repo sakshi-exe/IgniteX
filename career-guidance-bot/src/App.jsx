@@ -1,3 +1,4 @@
+import React, { useState, useMemo } from "react";
 import Sidebar from "./components/Sidebar";
 import WelcomeScreen from "./components/WelcomeScreen";
 import DiscoveryScreen from "./components/DiscoveryScreen";
