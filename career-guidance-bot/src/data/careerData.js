@@ -1,4 +1,4 @@
-// CareerPilot Knowledge Base & Career Matching Engine
+// LUNARC Compass — AI Career Guidance Knowledge Base & Matching Engine
 
 export const DISCOVERY_QUESTIONS = [
   {
@@ -262,7 +262,7 @@ export const CAREER_DATABASE = [
     simulationBoost: 7,
     matchBadge: "Strong Match",
     tagline: "Build intelligent systems using data, machine learning and software engineering.",
-    fitSummary: "Strong fit for your interest in AI, coding, mathematics and problem solving.",
+    fitSummary: "Your interest in AI, analytical thinking and problem solving point strongly in this direction.",
     salaryRange: "$120,000 – $185,000 / yr",
     outlook: "Very High Growth (+38% by 2030)",
     difficulty: "Moderate-Advanced",
@@ -270,30 +270,34 @@ export const CAREER_DATABASE = [
     explainableEvidence: [
       {
         type: "Interest",
-        title: "Interest Alignment",
-        text: "You selected Technology and AI as areas you enjoy exploring.",
+        title: "Interest",
+        text: "Technology + AI",
+        detail: "You selected Technology and AI as areas you enjoy exploring.",
         icon: "Code"
       },
       {
         type: "Strength",
-        title: "Cognitive Strengths",
-        text: "You identified analytical thinking and problem solving as your strongest qualities.",
+        title: "Strength",
+        text: "Analytical Thinking + Problem Solving",
+        detail: "You identified analytical thinking and problem solving as your strongest qualities.",
         icon: "Brain"
       },
       {
         type: "Subject",
-        title: "Subject Affinity",
-        text: "You enjoy mathematics and computer science fundamentals.",
+        title: "Subjects",
+        text: "Mathematics + Computer Science",
+        detail: "You enjoy mathematics and computer science fundamentals.",
         icon: "Binary"
       },
       {
         type: "Behavior",
-        title: "Simulation Behavior",
-        text: "You consistently selected technical and data-driven approaches in the career simulation.",
+        title: "Behavior",
+        text: "Technical + data-driven choices",
+        detail: "You consistently selected technical and data-driven approaches in the career simulation.",
         icon: "Cpu"
       }
     ],
-    aiInsight: "Your answers suggest that you enjoy solving structured problems and working with technical systems. Your scenario choices strongly reinforced this pattern, which is why Machine Learning Engineering ranks highest.",
+    aiInsight: "LUNARC Compass sees a strong alignment between the way you think, what you enjoy and the type of problems you prefer solving. Your scenario choices strongly reinforced this pattern, which is why Machine Learning Engineering ranks highest.",
     confidenceLabel: "High",
     confidenceDesc: "Your questionnaire answers and simulation choices strongly align.",
     skillGap: [
@@ -305,13 +309,14 @@ export const CAREER_DATABASE = [
     ],
     bestStartingPoint: {
       title: "Start with Python + SQL",
-      desc: "These skills will give you the strongest foundation for your next stage before entering complex ML pipelines."
+      desc: "Based on your current profile, start with Python + SQL. These skills will give you the strongest foundation for your next stage."
     },
     thirtyDayRoadmap: {
       whyThisRoadmap: "Because Python and SQL are currently your biggest skill opportunities, we prioritize them before introducing machine learning.",
       weeks: [
         {
           weekNumber: 1,
+          phaseName: "FOUNDATION",
           title: "Build your Python foundation",
           focus: "Python basics · Functions · Data structures · Problem solving",
           estimatedHours: "5–7 hours",
@@ -323,6 +328,7 @@ export const CAREER_DATABASE = [
         },
         {
           weekNumber: 2,
+          phaseName: "SKILLS",
           title: "Learn SQL fundamentals",
           focus: "SELECT · Filtering · Joins · Aggregations",
           estimatedHours: "4–6 hours",
@@ -334,6 +340,7 @@ export const CAREER_DATABASE = [
         },
         {
           weekNumber: 3,
+          phaseName: "PROJECT PREP",
           title: "Start statistics for ML",
           focus: "Mean / median · Probability basics · Distributions · Correlation",
           estimatedHours: "5–7 hours",
@@ -345,6 +352,7 @@ export const CAREER_DATABASE = [
         },
         {
           weekNumber: 4,
+          phaseName: "CAREER READY",
           title: "Build your first ML project",
           focus: "Student Performance Predictor · Dataset · Data cleaning · Simple model · Evaluation · README",
           estimatedHours: "6–10 hours",
@@ -455,7 +463,7 @@ export const CAREER_DATABASE = [
     simulationBoost: 5,
     matchBadge: "Strong Match",
     tagline: "Turn complex data into actionable insights, statistical models and strategic decisions.",
-    fitSummary: "Strong fit for your analytical mindset, interest in mathematics, and curiosity about trends.",
+    fitSummary: "Your analytical mindset, interest in mathematics, and curiosity about trends point towards this direction.",
     salaryRange: "$110,000 – $165,000 / yr",
     outlook: "High Growth (+32% by 2030)",
     difficulty: "Moderate",
@@ -463,30 +471,34 @@ export const CAREER_DATABASE = [
     explainableEvidence: [
       {
         type: "Interest",
-        title: "Interest Alignment",
-        text: "You enjoy analyzing data, spotting trends, and discovering patterns.",
+        title: "Interest",
+        text: "Data Analysis + Modeling",
+        detail: "You enjoy analyzing data, spotting trends, and discovering patterns.",
         icon: "PieChart"
       },
       {
         type: "Strength",
-        title: "Cognitive Strengths",
-        text: "You highlighted analytical reasoning and curiosity.",
+        title: "Strength",
+        text: "Analytical Thinking + Curiosity",
+        detail: "You highlighted analytical reasoning and curiosity.",
         icon: "BarChart3"
       },
       {
         type: "Subject",
-        title: "Subject Affinity",
-        text: "Mathematics and economics provide strong grounding for hypothesis testing.",
+        title: "Subjects",
+        text: "Mathematics + Economics",
+        detail: "Mathematics and economics provide strong grounding for hypothesis testing.",
         icon: "Binary"
       },
       {
         type: "Behavior",
-        title: "Simulation Behavior",
-        text: "You prioritized customer analytics and investigative data breakdowns.",
+        title: "Behavior",
+        text: "Exploratory + insight-driven",
+        detail: "You prioritized customer analytics and investigative data breakdowns.",
         icon: "Search"
       }
     ],
-    aiInsight: "Your analytical approach in Scenario 1 and 3 showed a strong desire to extract signals from noise before jumping into conclusions, aligning closely with Data Science.",
+    aiInsight: "LUNARC Compass sees high compatibility with your investigative problem-solving style. Your scenario choices in Scenario 1 and 3 showed a strong desire to extract signals from noise before jumping into conclusions.",
     confidenceLabel: "High",
     confidenceDesc: "Your scenario choices and subject preferences strongly align.",
     skillGap: [
@@ -498,13 +510,14 @@ export const CAREER_DATABASE = [
     ],
     bestStartingPoint: {
       title: "Start with SQL + Exploratory Data Analysis",
-      desc: "Master extracting data with SQL and summarizing distributions with Pandas visualizations."
+      desc: "Based on your current profile, start with SQL + Exploratory Data Analysis to establish quantitative signals."
     },
     thirtyDayRoadmap: {
       whyThisRoadmap: "Because SQL and data wrangling form the foundation of any exploratory data project, we focus on querying before predictive modeling.",
       weeks: [
         {
           weekNumber: 1,
+          phaseName: "FOUNDATION",
           title: "SQL & Data Extraction",
           focus: "Joins · Subqueries · Aggregates · Filtering",
           estimatedHours: "5–6 hours",
@@ -512,6 +525,7 @@ export const CAREER_DATABASE = [
         },
         {
           weekNumber: 2,
+          phaseName: "SKILLS",
           title: "Pandas & Exploratory Data Analysis",
           focus: "Data cleaning · Handling nulls · Aggregations",
           estimatedHours: "5–7 hours",
@@ -519,6 +533,7 @@ export const CAREER_DATABASE = [
         },
         {
           weekNumber: 3,
+          phaseName: "PROJECT PREP",
           title: "Statistical Testing & Correlation",
           focus: "Hypothesis testing · p-values · Normal distribution",
           estimatedHours: "4–6 hours",
@@ -526,6 +541,7 @@ export const CAREER_DATABASE = [
         },
         {
           weekNumber: 4,
+          phaseName: "CAREER READY",
           title: "Interactive Data Dashboard Project",
           focus: "Streamlit / Seaborn · Visual narrative · GitHub publication",
           estimatedHours: "6–8 hours",
@@ -612,7 +628,7 @@ export const CAREER_DATABASE = [
     simulationBoost: 4,
     matchBadge: "Good Match",
     tagline: "Design, build and maintain scalable software applications and modern digital systems.",
-    fitSummary: "A strong option if you enjoy building technology, creating software, and solving logical problems.",
+    fitSummary: "A strong direction if you enjoy building technology, creating software, and solving logical problems.",
     salaryRange: "$105,000 – $160,000 / yr",
     outlook: "Steady High Demand (+25% by 2030)",
     difficulty: "Moderate",
@@ -620,30 +636,34 @@ export const CAREER_DATABASE = [
     explainableEvidence: [
       {
         type: "Interest",
-        title: "Interest Alignment",
-        text: "You enjoy coding and building interactive digital applications.",
+        title: "Interest",
+        text: "Coding + Systems",
+        detail: "You enjoy coding and building interactive digital applications.",
         icon: "Cpu"
       },
       {
         type: "Strength",
-        title: "Cognitive Strengths",
-        text: "You excel at structured problem solving and fast learning.",
+        title: "Strength",
+        text: "Problem Solving + Fast Learning",
+        detail: "You excel at structured problem solving and fast learning.",
         icon: "Zap"
       },
       {
         type: "Subject",
-        title: "Subject Affinity",
-        text: "Computer science algorithms and architecture align with core engineering.",
+        title: "Subjects",
+        text: "Computer Science + Logic",
+        detail: "Computer science algorithms and architecture align with core engineering.",
         icon: "Terminal"
       },
       {
         type: "Behavior",
-        title: "Simulation Behavior",
-        text: "You showed a preference for building tangible product solutions.",
+        title: "Behavior",
+        text: "Practical product engineering",
+        detail: "You showed a preference for building tangible product solutions in Scenario 1.",
         icon: "Code"
       }
     ],
-    aiInsight: "Your inclination toward turning ideas into working applications makes software engineering a reliable, high-growth path.",
+    aiInsight: "LUNARC Compass identifies your builder mindset as a key asset. Your inclination toward turning ideas into working applications makes software engineering a reliable, high-growth path.",
     confidenceLabel: "High",
     confidenceDesc: "Your engineering instincts and problem solving match well.",
     skillGap: [
@@ -661,6 +681,7 @@ export const CAREER_DATABASE = [
       weeks: [
         {
           weekNumber: 1,
+          phaseName: "FOUNDATION",
           title: "DSA Fundamentals",
           focus: "Arrays · Hash Maps · Two pointers · Big O",
           estimatedHours: "5–7 hours",
@@ -668,6 +689,7 @@ export const CAREER_DATABASE = [
         },
         {
           weekNumber: 2,
+          phaseName: "SKILLS",
           title: "Fullstack Architecture",
           focus: "React state · REST endpoints · Express.js",
           estimatedHours: "6–8 hours",
@@ -675,6 +697,7 @@ export const CAREER_DATABASE = [
         },
         {
           weekNumber: 3,
+          phaseName: "PROJECT PREP",
           title: "Database Integration",
           focus: "PostgreSQL · Prisma ORM · Relational schemas",
           estimatedHours: "5–7 hours",
@@ -682,6 +705,7 @@ export const CAREER_DATABASE = [
         },
         {
           weekNumber: 4,
+          phaseName: "CAREER READY",
           title: "Deploy Production App",
           focus: "Authentication · Error handling · Vercel / Render deployment",
           estimatedHours: "6–10 hours",
@@ -744,151 +768,9 @@ export const CAREER_DATABASE = [
         resources: [{ name: "NeetCode 150", type: "Free Guide" }]
       }
     ]
-  },
-  {
-    id: "product-designer",
-    title: "AI Product Designer (UI/UX)",
-    defaultMatch: 89,
-    baselineMatch: 84,
-    simulationBoost: 5,
-    matchBadge: "Strong Match",
-    tagline: "Design intuitive, delightful user experiences for AI-powered products and modern web apps.",
-    fitSummary: "Great fit for your creative instincts, empathy for users, and passion for design & tech.",
-    salaryRange: "$95,000 – $150,000 / yr",
-    outlook: "Strong Demand (+20% by 2030)",
-    difficulty: "Moderate",
-    profileBadges: ["Design", "Empathy", "Visuals", "User Research"],
-    explainableEvidence: [
-      {
-        type: "Interest",
-        title: "Interest Alignment",
-        text: "You enjoy visual aesthetics, design, and user psychology.",
-        icon: "Palette"
-      },
-      {
-        type: "Strength",
-        title: "Cognitive Strengths",
-        text: "You highlighted creativity and user empathy.",
-        icon: "Lightbulb"
-      },
-      {
-        type: "Subject",
-        title: "Subject Affinity",
-        text: "Arts, psychology, and design thinking guide intuitive UX.",
-        icon: "PenTool"
-      },
-      {
-        type: "Behavior",
-        title: "Simulation Behavior",
-        text: "You chose to understand customer needs and simplify user interfaces.",
-        icon: "Layout"
-      }
-    ],
-    aiInsight: "Your scenario choices in fraud detection and customer churn highlighted a natural instinct to solve problems from the user perspective first.",
-    confidenceLabel: "High",
-    confidenceDesc: "Creative instincts and user empathy align strongly.",
-    skillGap: [
-      { skill: "Figma Prototyping", current: "Good", target: "Strong", priority: "High" },
-      { skill: "User Research & Testing", current: "Developing", target: "Strong", priority: "High" },
-      { skill: "Design Systems", current: "Beginner", target: "Intermediate", priority: "High" },
-      { skill: "AI Interaction Patterns", current: "Beginner", target: "Intermediate", priority: "Medium" }
-    ],
-    bestStartingPoint: {
-      title: "Start with User Journeys + Figma Auto-Layout",
-      desc: "Recreate real-world app interfaces and build reusable design component libraries."
-    },
-    thirtyDayRoadmap: {
-      whyThisRoadmap: "Because Figma fluency and wireframing form the basis of all design evaluations, we begin with tactile prototyping before design system architecture.",
-      weeks: [
-        {
-          weekNumber: 1,
-          title: "Figma Vector & Layout Mastery",
-          focus: "Auto-layout · Components · Spacing systems",
-          estimatedHours: "4–6 hours",
-          goal: "Replicate 3 production UI screens pixel-perfect."
-        },
-        {
-          weekNumber: 2,
-          title: "User Journey & Wireframing",
-          focus: "User personas · Journey mapping · Low-fi wireframes",
-          estimatedHours: "5–6 hours",
-          goal: "Map a 5-step user journey solving onboarding friction."
-        },
-        {
-          weekNumber: 3,
-          title: "Interactive Prototyping",
-          focus: "Micro-interactions · Smart animate · Variables",
-          estimatedHours: "5–7 hours",
-          goal: "Build a clickable mobile & desktop prototype."
-        },
-        {
-          weekNumber: 4,
-          title: "UX Case Study Project",
-          focus: "AI App Redesign · Problem narrative · Published portfolio",
-          estimatedHours: "6–8 hours",
-          goal: "Publish a full UX case study on Behance/Framer."
-        }
-      ]
-    },
-    skills: [
-      { name: "Figma & FigJam", category: "Tooling", level: "Essential" },
-      { name: "User Research & Testing", category: "Methodology", level: "Core" },
-      { name: "Design Systems & Tokens", category: "Craft", level: "Core" },
-      { name: "Interactive Prototyping", category: "Craft", level: "Core" },
-      { name: "Basic HTML/CSS", category: "Technical", level: "Practical" },
-      { name: "AI UX Guidelines", category: "Specialization", level: "Practical" }
-    ],
-    roadmap: [
-      {
-        stepNumber: "01",
-        title: "Build the foundation",
-        focus: "Visual & UX Principles",
-        duration: "2–3 weeks",
-        description: "Master typography, color theory, spacing, hierarchy, and Figma vector tools.",
-        milestones: ["Recreate 3 world-class UI screens in Figma", "Learn Figma auto-layout and components"],
-        resources: [{ name: "Refactoring UI & Figma Tutorials", type: "Guide" }]
-      },
-      {
-        stepNumber: "02",
-        title: "User Research & Wireframing",
-        focus: "User Journeys & Personas",
-        duration: "2–3 weeks",
-        description: "Conduct user interviews, map user flows, and sketch wireframes for solving real problems.",
-        milestones: ["Create a 5-step user journey map", "Produce low-fidelity wireframes"],
-        resources: [{ name: "Nielsen Norman Group UX Basics", type: "Articles" }]
-      },
-      {
-        stepNumber: "03",
-        title: "Interactive Prototyping",
-        focus: "Micro-interactions & Systems",
-        duration: "3–4 weeks",
-        description: "Build responsive design systems with tokens, micro-animations, and clickable prototypes.",
-        milestones: ["Build a reusable 20+ component design system", "Create an animated prototype in Figma"],
-        resources: [{ name: "Figma Community Design Systems", type: "Resource" }]
-      },
-      {
-        stepNumber: "04",
-        title: "Case Study Portfolio",
-        focus: "2 Polished UX Case Studies",
-        duration: "4–5 weeks",
-        description: "Write in-depth case studies articulating the problem, research, iterations, and final solution.",
-        milestones: ["Publish portfolio website on Framer or Webflow", "Document problem-to-solution narrative"],
-        resources: [{ name: "Cofolios (Student Design Portfolios)", type: "Inspiration" }]
-      },
-      {
-        stepNumber: "05",
-        title: "Design Industry Entry",
-        focus: "Critiques & Pitching",
-        duration: "Ongoing",
-        description: "Practice design walkthroughs, join design communities, and apply for junior UX roles.",
-        milestones: ["Do 3 portfolio reviews with senior mentors", "Apply for student design internships"],
-        resources: [{ name: "ADPList Mentorship", type: "Free Mentoring" }]
-      }
-    ]
   }
 ];
 
-// Dynamic matching calculator based on questionnaire + simulation answers
 export function calculateCareerMatches(userAnswers = {}, simulationAnswers = {}) {
   const { interests = [], strengths = [], subjects = [], workPreferences = [] } = userAnswers;
 
@@ -897,18 +779,13 @@ export function calculateCareerMatches(userAnswers = {}, simulationAnswers = {})
     let boost = 0;
     const behaviorReasons = [];
 
-    // Evaluate interests
     if (interests.includes("technology") && ["ml-engineer", "software-engineer", "data-scientist"].includes(career.id)) {
       score += 4;
     }
     if (interests.includes("problem_solving")) {
       score += 3;
     }
-    if (interests.includes("design") && career.id === "product-designer") {
-      score += 6;
-    }
 
-    // Evaluate Simulation Behavior
     if (simulationAnswers.scenario_1 === "analyze_data") {
       if (["ml-engineer", "data-scientist"].includes(career.id)) {
         boost += 3;
@@ -918,11 +795,6 @@ export function calculateCareerMatches(userAnswers = {}, simulationAnswers = {})
       if (["software-engineer", "ml-engineer"].includes(career.id)) {
         boost += 3;
         behaviorReasons.push("Prioritized technical product engineering in Scenario 1");
-      }
-    } else if (simulationAnswers.scenario_1 === "talk_customers") {
-      if (career.id === "product-designer") {
-        boost += 4;
-        behaviorReasons.push("Prioritized qualitative customer discovery in Scenario 1");
       }
     }
 
@@ -936,11 +808,6 @@ export function calculateCareerMatches(userAnswers = {}, simulationAnswers = {})
         boost += 4;
         behaviorReasons.push("Chosen software deployment focus in Scenario 2");
       }
-    } else if (simulationAnswers.scenario_2 === "design_experience") {
-      if (career.id === "product-designer") {
-        boost += 4;
-        behaviorReasons.push("Chosen user experience focus in Scenario 2");
-      }
     }
 
     if (simulationAnswers.scenario_3 === "break_down_problem") {
@@ -950,7 +817,6 @@ export function calculateCareerMatches(userAnswers = {}, simulationAnswers = {})
       }
     }
 
-    // Default simulation boost if not filled
     const finalBoost = boost > 0 ? boost : (career.simulationBoost || 5);
     const finalScore = Math.min(98, Math.max(80, score + finalBoost));
 
@@ -962,9 +828,7 @@ export function calculateCareerMatches(userAnswers = {}, simulationAnswers = {})
     };
   });
 
-  // Sort descending by match percentage
   scoredCareers.sort((a, b) => b.matchPercentage - a.matchPercentage);
-
   return scoredCareers;
 }
 
@@ -1012,26 +876,26 @@ export function generateProfileSummary(userAnswers) {
   };
 }
 
-// AI Knowledge Base
+// AI Knowledge Base for LUNARC Compass
 export const AI_KNOWLEDGE_BASE = {
   math_question: {
     triggers: ["math", "maths", "weak at math", "calculus", "scared of math"],
-    response: "Yes. Your profile shows strong interest in AI and problem solving. Instead of trying to master advanced mathematics immediately, start with basic statistics alongside Python and gradually build your mathematics foundation."
+    response: "Yes. Your profile shows strong interest in AI and problem solving. Start with basic statistics while building your Python foundation, then gradually strengthen your mathematics."
   },
   first_step: {
     triggers: ["learn first", "what should i learn", "beginner", "where to start", "week 1"],
-    response: "In **Week 1 of your 30-Day Plan**, focus on **Python fundamentals**: basic syntax, variables, lists, dictionaries, and functions. Spend 5–7 hours writing small scripts without relying on tutorial copy-pasting."
+    response: "In **Week 1 of your 30-Day Plan**, start with **Python basics**: syntax, variables, lists, dictionaries, and functions. Spend 5–7 hours writing small scripts without relying on tutorial copy-pasting."
   },
   courses: {
     triggers: ["course", "recommend courses", "free courses", "certifications", "tutorials", "resource"],
-    response: "Here are the top free resources tailored for your 30-day plan:\n1. **CS50P (Harvard Python)** — Comprehensive beginner coding.\n2. **SQLBolt** — Hands-on interactive browser SQL.\n3. **Khan Academy Statistics** — Clear visual probability & distributions.\n4. **StatQuest with Josh Starmer** — Step-by-step ML intuition."
+    response: "Here are the top free resources recommended by LUNARC Compass:\n1. **CS50P (Harvard Python)** — Comprehensive beginner coding.\n2. **SQLBolt** — Hands-on interactive browser SQL.\n3. **Khan Academy Statistics** — Clear visual probability & distributions.\n4. **StatQuest with Josh Starmer** — Intuitive machine learning guides."
   },
   compare: {
     triggers: ["compare", "difference", "data science", "data scientist vs ml"],
     response: "• **Machine Learning Engineer (96% Match)**: Focuses on engineering AI models into production code and scalable systems.\n• **Data Scientist (91% Match)**: Focuses on analyzing historical datasets, finding statistical trends, and driving business decisions."
   },
   default_roadmap: {
-    triggers: ["roadmap", "timeline", "30 day", "plan"],
-    response: "Your **30-Day Plan** breaks down into:\n• **Week 1**: Python Foundation (5–7 hrs)\n• **Week 2**: SQL Fundamentals (4–6 hrs)\n• **Week 3**: Statistics for ML (5–7 hrs)\n• **Week 4**: Student Performance Predictor ML Project (6–10 hrs)."
+    triggers: ["roadmap", "timeline", "30 day", "plan", "path"],
+    response: "Your **30-Day Career Path** breaks down into:\n• **Week 1**: Python Foundation (5–7 hrs)\n• **Week 2**: SQL Fundamentals (4–6 hrs)\n• **Week 3**: Statistics for ML (5–7 hrs)\n• **Week 4**: Student Performance Predictor ML Project (6–10 hrs)."
   }
 };

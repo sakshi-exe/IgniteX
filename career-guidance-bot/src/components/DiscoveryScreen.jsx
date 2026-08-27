@@ -1,5 +1,7 @@
-import React from "react";
+import React from 'react';
 import {
+  ArrowLeft,
+  ArrowRight,
   Code,
   Palette,
   Microscope,
@@ -30,13 +32,11 @@ import {
   Heart,
   Rocket,
   Globe,
-  ArrowLeft,
-  ArrowRight,
   Check
-} from "lucide-react";
-import { DISCOVERY_QUESTIONS } from "../data/careerData";
+} from 'lucide-react';
+import { DISCOVERY_QUESTIONS } from '../data/careerData';
 
-// Icon mapping helper
+// Dynamic icon mapper
 const ICON_MAP = {
   Code,
   Palette,
@@ -70,93 +70,88 @@ const ICON_MAP = {
   Globe
 };
 
-export function DiscoveryScreen({
+export default function DiscoveryScreen({
   currentStepIndex,
   answers,
-  onToggleOption,
+  onSelectOption,
   onNext,
   onBack
 }) {
-  const currentQuestion = DISCOVERY_QUESTIONS[currentStepIndex] || DISCOVERY_QUESTIONS[0];
-  const totalSteps = DISCOVERY_QUESTIONS.length;
-  const progressPercent = ((currentStepIndex + 1) / totalSteps) * 100;
+  const currentQuestion = DISCOVERY_QUESTIONS[currentStepIndex];
+  const selectedOptions = answers[currentQuestion.id] || [];
+  const isValid = selectedOptions.length >= (currentQuestion.minSelections || 1);
+  const isLastQuestion = currentStepIndex === DISCOVERY_QUESTIONS.length - 1;
+  const progressPercent = ((currentStepIndex + 1) / DISCOVERY_QUESTIONS.length) * 100;
 
-  const currentSelection = answers[currentQuestion.id] || [];
-  const hasMinSelection = currentSelection.length >= currentQuestion.minSelections;
-  const isMaxReached = currentSelection.length >= currentQuestion.maxSelections;
-
-  const handleCardClick = (optionId) => {
-    onToggleOption(currentQuestion.id, optionId, currentQuestion.maxSelections);
+  const handleOptionToggle = (optionId) => {
+    let newSelections;
+    if (selectedOptions.includes(optionId)) {
+      newSelections = selectedOptions.filter(id => id !== optionId);
+    } else {
+      if (selectedOptions.length < currentQuestion.maxSelections) {
+        newSelections = [...selectedOptions, optionId];
+      } else {
+        newSelections = [...selectedOptions.slice(1), optionId];
+      }
+    }
+    onSelectOption(currentQuestion.id, newSelections);
   };
 
   return (
-    <div className="discovery-container animate-fade-in">
-      {/* Top Header & Progress */}
+    <div className="discovery-container">
+      {/* Top Header Card */}
       <div className="discovery-header-card">
         <div className="discovery-meta-row">
           <div className="meta-left">
-            <span className="discovery-label">Career Discovery</span>
-            <span className="step-badge">Step {currentStepIndex + 1} of {totalSteps}</span>
+            <span className="discovery-label">LUNARC COMPASS · Career Discovery</span>
+            <span className="step-badge">
+              Step {currentQuestion.step} of {DISCOVERY_QUESTIONS.length}
+            </span>
           </div>
-          <div className="meta-right">
-            <span className="time-indicator">{currentQuestion.timeRemaining}</span>
-          </div>
+          <span className="time-indicator">{currentQuestion.timeRemaining}</span>
         </div>
 
-        {/* Progress Bar */}
-        <div className="progress-track" role="progressbar" aria-valuenow={progressPercent} aria-valuemin="0" aria-valuemax="100">
+        {/* Progress bar */}
+        <div className="progress-track">
           <div
             className="progress-fill"
             style={{ width: `${progressPercent}%` }}
-          />
+          ></div>
         </div>
       </div>
 
-      {/* Main Question Card Area */}
+      {/* Question Content */}
       <div className="question-content-box">
         <div className="question-header">
-          <h1 className="question-title">{currentQuestion.title}</h1>
+          <h2 className="question-title">{currentQuestion.title}</h2>
           <p className="question-subtitle">{currentQuestion.subtitle}</p>
         </div>
 
-        {/* Grid of Interactive Option Cards */}
+        {/* Options Grid */}
         <div className="options-grid">
-          {currentQuestion.options.map((opt) => {
-            const isSelected = currentSelection.includes(opt.id);
-            const IconComponent = ICON_MAP[opt.icon] || Sparkles;
+          {currentQuestion.options.map(option => {
+            const isSelected = selectedOptions.includes(option.id);
+            const IconComponent = ICON_MAP[option.icon] || Compass;
 
             return (
               <div
-                key={opt.id}
-                role="button"
-                tabIndex={0}
-                className={`option-card ${isSelected ? "selected" : ""} ${
-                  !isSelected && isMaxReached ? "disabled-hint" : ""
-                }`}
-                onClick={() => handleCardClick(opt.id)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    handleCardClick(opt.id);
-                  }
-                }}
+                key={option.id}
+                className={`option-card ${isSelected ? 'selected' : ''}`}
+                onClick={() => handleOptionToggle(option.id)}
               >
                 <div className="option-card-inner">
                   <div className="card-top-row">
-                    <div className={`option-icon-box ${isSelected ? "icon-active" : ""}`}>
+                    <div className={`option-icon-box ${isSelected ? 'icon-active' : ''}`}>
                       <IconComponent size={20} />
                     </div>
-
-                    <div className={`selection-indicator ${isSelected ? "checked" : ""}`}>
-                      {isSelected ? <Check size={14} /> : null}
+                    <div className={`selection-indicator ${isSelected ? 'checked' : ''}`}>
+                      {isSelected && <Check size={14} strokeWidth={3} />}
                     </div>
                   </div>
 
-                  <div className="option-text-group">
-                    <h3 className="option-title">{opt.title}</h3>
-                    {opt.description && (
-                      <p className="option-description">{opt.description}</p>
-                    )}
+                  <div className="card-text-group">
+                    <h3 className="option-title">{option.title}</h3>
+                    <p className="option-description">{option.description}</p>
                   </div>
                 </div>
               </div>
@@ -164,34 +159,35 @@ export function DiscoveryScreen({
           })}
         </div>
 
-        {/* Selection Status Note */}
+        {/* Selection Status Counter */}
         <div className="selection-status-strip">
           <span className="selection-count-text">
-            {currentSelection.length} of {currentQuestion.maxSelections} selected
+            {selectedOptions.length} of {currentQuestion.maxSelections} selected
           </span>
-          {!hasMinSelection && (
-            <span className="selection-hint">Please choose at least 1 option to continue</span>
-          )}
+          <span className="selection-hint">
+            {selectedOptions.length === 0
+              ? 'Select at least 1 option to continue'
+              : selectedOptions.length < currentQuestion.maxSelections
+              ? 'You can pick more options or continue'
+              : 'Maximum selections chosen'}
+          </span>
         </div>
       </div>
 
-      {/* Bottom Sticky Action Bar */}
+      {/* Footer Navigation Bar */}
       <div className="discovery-footer-nav">
-        <button
-          className="btn-back"
-          onClick={onBack}
-        >
-          <ArrowLeft size={17} />
-          <span>Back</span>
+        <button className="btn-back" onClick={onBack}>
+          <ArrowLeft size={16} />
+          <span>{currentStepIndex === 0 ? 'Home' : 'Previous'}</span>
         </button>
 
         <button
-          className={`btn-continue ${hasMinSelection ? "active" : "disabled"}`}
-          disabled={!hasMinSelection}
-          onClick={onNext}
+          className={`btn-continue ${isValid ? 'active' : 'disabled'}`}
+          onClick={isValid ? onNext : undefined}
+          disabled={!isValid}
         >
-          <span>{currentStepIndex === totalSteps - 1 ? "Analyze Career Profile" : "Continue"}</span>
-          <ArrowRight size={17} />
+          <span>{isLastQuestion ? 'Proceed to Simulation' : 'Continue'}</span>
+          <ArrowRight size={16} />
         </button>
       </div>
     </div>

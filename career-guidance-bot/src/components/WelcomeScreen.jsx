@@ -1,128 +1,124 @@
-import React from "react";
-import { ArrowRight, Compass, Sparkles, Map, User, HelpCircle, Info } from "lucide-react";
-import { AbstractIllustration } from "./AbstractIllustration";
+import React from 'react';
+import { ArrowRight, Compass, Sparkles, Target, MapPin, User, Info, HelpCircle } from 'lucide-react';
+import AbstractIllustration from './AbstractIllustration';
 
-export function WelcomeScreen({ onStartDiscovery, onOpenHowItWorks, onOpenAbout, onOpenProfile }) {
+export default function WelcomeScreen({ onStartDiscovery, onOpenHowItWorks, onOpenAbout }) {
   return (
-    <div className="welcome-page-container animate-fade-in">
-      {/* Minimal Top Header */}
+    <div className="welcome-page-container">
+      {/* Top Header */}
       <header className="page-header">
-        <div className="header-left">
-          <div className="header-brand-pill">
-            <Sparkles size={16} className="text-primary" />
-            <span className="pill-title">AI Career Discovery</span>
-          </div>
+        <div className="header-brand-pill">
+          <Compass size={16} className="text-primary-600" />
+          <span>LUNARC Compass · AI Career Guidance</span>
         </div>
-
         <div className="header-right">
           <button className="header-link" onClick={onOpenHowItWorks}>
             <HelpCircle size={15} />
-            <span>How it works</span>
+            <span>How it Works</span>
           </button>
           <button className="header-link" onClick={onOpenAbout}>
             <Info size={15} />
             <span>About</span>
           </button>
-          <button className="header-profile-btn" onClick={onOpenProfile} title="View your profile">
-            <div className="avatar-circle">
-              <User size={15} />
-            </div>
+          <div className="header-profile-btn">
+            <span className="avatar-circle">
+              <User size={14} />
+            </span>
             <span className="profile-label">Student</span>
-          </button>
+          </div>
         </div>
       </header>
 
-      {/* Main Hero Section */}
-      <main className="hero-main-layout">
-        <div className="hero-grid">
-          {/* Left Column: Hero Content */}
-          <div className="hero-content">
-            <div className="hero-eyebrow">
-              <span className="sparkle-tag">✦ Personalized Guidance</span>
-              <span className="dot-divider">•</span>
-              <span className="fast-tag">Takes ~2 min</span>
-            </div>
-
-            <h1 className="hero-title">
-              Find a career path that fits you.
-            </h1>
-
-            <p className="hero-subtitle">
-              Answer a few simple questions about your interests and strengths. Our AI will help you explore careers that match your profile.
-            </p>
-
-            {/* Primary Action Button */}
-            <div className="hero-cta-group">
-              <button className="btn-primary-large" onClick={onStartDiscovery}>
-                <span>Start Career Discovery</span>
-                <ArrowRight size={18} className="btn-arrow" />
-              </button>
-              <span className="cta-subtext">Takes about 2 minutes · No sign up required</span>
-            </div>
-
-            {/* Trust Badges / Highlights */}
-            <div className="hero-stats-strip">
-              <div className="stat-pill">
-                <span className="stat-bullet"></span>
-                <span>Tailored for students</span>
-              </div>
-              <div className="stat-pill">
-                <span className="stat-bullet"></span>
-                <span>Actionable learning roadmap</span>
-              </div>
-              <div className="stat-pill">
-                <span className="stat-bullet"></span>
-                <span>Instant AI advice</span>
-              </div>
-            </div>
+      {/* Hero Section */}
+      <section className="hero-grid">
+        <div className="hero-content">
+          <div className="hero-eyebrow">
+            <span className="sparkle-tag">
+              <Compass size={14} /> LUNARC COMPASS
+            </span>
+            <span className="dot-divider">•</span>
+            <span className="fast-tag">Find your direction. Build your future.</span>
           </div>
 
-          {/* Right Column: Abstract Pastel Vector Illustration */}
-          <div className="hero-visual-col">
-            <AbstractIllustration />
+          <h1 className="hero-title">
+            Find your direction.
+          </h1>
+
+          <h2 className="hero-supporting-title">
+            AI-powered career guidance built around YOU.
+          </h2>
+
+          <p className="hero-subtitle">
+            Explore careers that match your interests, strengths and goals — then get a personalized path to move forward.
+          </p>
+
+          <div className="hero-cta-group">
+            <button className="btn-primary-large" onClick={onStartDiscovery}>
+              <span>Start Career Discovery</span>
+              <ArrowRight size={18} className="btn-arrow" />
+            </button>
+            <span className="cta-subtext">Takes about 2 minutes • No sign-up required</span>
+          </div>
+
+          {/* Quick Pillars Strip */}
+          <div className="hero-stats-strip">
+            <div className="stat-pill">
+              <span className="stat-bullet"></span>
+              <span>4 Simple Questions</span>
+            </div>
+            <div className="stat-pill">
+              <span className="stat-bullet"></span>
+              <span>Quick Career Simulation</span>
+            </div>
+            <div className="stat-pill">
+              <span className="stat-bullet"></span>
+              <span>Personalized 30-Day Path</span>
+            </div>
           </div>
         </div>
 
-        {/* Three Simple Benefits Section */}
-        <section className="benefits-section">
-          <div className="benefits-header">
-            <span className="section-eyebrow">HOW CAREERPILOT HELPS</span>
-            <h2>Three simple steps to your next chapter.</h2>
+        {/* Abstract Compass Hero Visual */}
+        <div className="hero-visual-col">
+          <AbstractIllustration />
+        </div>
+      </section>
+
+      {/* 3 Core Pillars Section */}
+      <section className="benefits-section">
+        <div className="benefits-header">
+          <span className="section-eyebrow">DISCOVER • DIRECTION • GROWTH</span>
+          <h2>How LUNARC Compass Guides You</h2>
+        </div>
+
+        <div className="benefits-grid">
+          <div className="benefit-card">
+            <div className="benefit-number-pill">01</div>
+            <div className="benefit-icon-wrapper benefit-lavender">
+              <Compass size={22} />
+            </div>
+            <h3>Discover Your Interests</h3>
+            <p>Answer a few quick questions about what sparks your curiosity, your favorite subjects, and your strengths.</p>
           </div>
 
-          <div className="benefits-grid">
-            {/* Benefit 01 */}
-            <div className="benefit-card">
-              <div className="benefit-number-pill">01</div>
-              <div className="benefit-icon-wrapper benefit-lavender">
-                <Compass size={22} />
-              </div>
-              <h3>Discover</h3>
-              <p>Understand what careers fit your interests, natural strengths, and preferred subjects.</p>
+          <div className="benefit-card">
+            <div className="benefit-number-pill">02</div>
+            <div className="benefit-icon-wrapper benefit-blue">
+              <Target size={22} />
             </div>
-
-            {/* Benefit 02 */}
-            <div className="benefit-card">
-              <div className="benefit-number-pill">02</div>
-              <div className="benefit-icon-wrapper benefit-blue">
-                <Sparkles size={22} />
-              </div>
-              <h3>Compare</h3>
-              <p>Explore your strongest career matches with clear percentage scores and reasoning.</p>
-            </div>
-
-            {/* Benefit 03 */}
-            <div className="benefit-card">
-              <div className="benefit-number-pill">03</div>
-              <div className="benefit-icon-wrapper benefit-mint">
-                <Map size={22} />
-              </div>
-              <h3>Plan</h3>
-              <p>Get a personalized learning roadmap with step-by-step milestones and free resources.</p>
-            </div>
+            <h3>Find Your Direction</h3>
+            <p>Test real-world career scenarios and receive explainable career matches with transparent match reasoning.</p>
           </div>
-        </section>
-      </main>
+
+          <div className="benefit-card">
+            <div className="benefit-number-pill">03</div>
+            <div className="benefit-icon-wrapper benefit-mint">
+              <MapPin size={22} />
+            </div>
+            <h3>Follow Your Path</h3>
+            <p>Get a structured, week-by-week 30-day roadmap with actionable projects and curated learning resources.</p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

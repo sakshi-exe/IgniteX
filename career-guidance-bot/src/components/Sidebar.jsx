@@ -1,100 +1,70 @@
-import React from "react";
-import { Compass, Sparkles, Map, Heart, Award, ArrowRight, RotateCcw } from "lucide-react";
+import React from 'react';
+import { Compass, Sparkles, Target, Map, User, RefreshCw, Layers } from 'lucide-react';
 
-export function Sidebar({ currentView, onNavigate, onResetDiscovery, matchesCount = 0 }) {
+export default function Sidebar({ currentView, onNavigate, onRetake, completedDiscovery }) {
   return (
     <aside className="sidebar">
       {/* Brand Header */}
-      <div className="sidebar-brand" onClick={() => onNavigate("welcome")}>
+      <div className="sidebar-brand" onClick={() => onNavigate('welcome')}>
         <div className="brand-logo-icon">
-          <Sparkles className="icon-sparkle" size={18} />
+          <Compass size={20} strokeWidth={2.4} />
         </div>
         <div className="brand-text-container">
-          <span className="brand-name">CareerPilot</span>
+          <span className="brand-name">LUNARC Compass</span>
           <span className="brand-tagline">AI Career Guidance</span>
         </div>
       </div>
 
-      {/* Navigation Sections */}
+      {/* Navigation Links */}
       <nav className="sidebar-nav">
-        {/* Section: Discover */}
         <div className="nav-section">
-          <span className="nav-section-title">Discover</span>
+          <span className="nav-section-title">Navigation</span>
           <ul className="nav-list">
             <li>
               <button
-                className={`nav-item ${
-                  currentView === "welcome" ||
-                  currentView === "discovery" ||
-                  currentView === "analysis" ||
-                  currentView === "career-detail"
-                    ? "active"
-                    : ""
-                }`}
-                onClick={() => onNavigate("advisor")}
+                className={`nav-item ${currentView === 'welcome' || currentView === 'discovery' || currentView === 'simulation-intro' || currentView === 'simulation' || currentView === 'analysis' ? 'active' : ''}`}
+                onClick={() => onNavigate(completedDiscovery ? 'results' : 'welcome')}
               >
-                <Compass size={17} className="nav-icon" />
-                <span>Career Advisor</span>
+                <Compass size={18} className="nav-icon" />
+                <span>Discover</span>
+                {!completedDiscovery && <span className="nav-badge">Start</span>}
               </button>
             </li>
             <li>
               <button
-                className={`nav-item ${currentView === "results" ? "active" : ""}`}
-                onClick={() => onNavigate("results")}
+                className={`nav-item ${currentView === 'results' || currentView === 'career-detail' ? 'active' : ''}`}
+                onClick={() => onNavigate('results')}
               >
-                <Sparkles size={17} className="nav-icon" />
-                <span>My Matches</span>
-                {matchesCount > 0 && (
-                  <span className="nav-badge">{matchesCount}</span>
-                )}
+                <Target size={18} className="nav-icon" />
+                <span>Career Matches</span>
               </button>
             </li>
             <li>
               <button
-                className={`nav-item ${currentView === "my-roadmap" ? "active" : ""}`}
-                onClick={() => onNavigate("my-roadmap")}
+                className={`nav-item ${currentView === 'thirty-day-roadmap' ? 'active' : ''}`}
+                onClick={() => onNavigate('thirty-day-roadmap')}
               >
-                <Map size={17} className="nav-icon" />
-                <span>My Roadmap</span>
-              </button>
-            </li>
-          </ul>
-        </div>
-
-        {/* Section: Profile */}
-        <div className="nav-section">
-          <span className="nav-section-title">Profile</span>
-          <ul className="nav-list">
-            <li>
-              <button
-                className={`nav-item ${currentView === "profile-interests" ? "active" : ""}`}
-                onClick={() => onNavigate("profile-interests")}
-              >
-                <Heart size={17} className="nav-icon" />
-                <span>My Interests</span>
+                <Map size={18} className="nav-icon" />
+                <span>Skill Roadmap</span>
               </button>
             </li>
             <li>
               <button
-                className={`nav-item ${currentView === "profile-skills" ? "active" : ""}`}
-                onClick={() => onNavigate("profile-skills")}
+                className={`nav-item ${currentView.startsWith('profile') ? 'active' : ''}`}
+                onClick={() => onNavigate('profile-interests')}
               >
-                <Award size={17} className="nav-icon" />
-                <span>My Skills</span>
+                <User size={18} className="nav-icon" />
+                <span>My Profile</span>
               </button>
             </li>
           </ul>
         </div>
       </nav>
 
-      {/* Footer Area: AI Online & Retake Discovery */}
+      {/* Sidebar Footer */}
       <div className="sidebar-footer">
-        <button
-          className="retake-button"
-          onClick={onResetDiscovery}
-          title="Restart career questionnaire"
-        >
-          <RotateCcw size={14} />
+        <button className="retake-button" onClick={onRetake} title="Start questionnaire again">
+          <RefreshCw size={14} />
           <span>Retake Discovery</span>
         </button>
 
@@ -102,7 +72,11 @@ export function Sidebar({ currentView, onNavigate, onResetDiscovery, matchesCoun
           <span className="status-dot">
             <span className="status-ping"></span>
           </span>
-          <span className="status-text">AI Online</span>
+          <span className="status-text">LUNARC AI Online</span>
+        </div>
+
+        <div className="hackathon-tag-pill">
+          <span>Built for LUNARC 2.0</span>
         </div>
       </div>
     </aside>

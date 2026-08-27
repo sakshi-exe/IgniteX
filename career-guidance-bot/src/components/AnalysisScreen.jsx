@@ -1,120 +1,93 @@
-import React, { useEffect, useState } from "react";
-import { Sparkles, Check, Loader2, Brain, ArrowRight } from "lucide-react";
+import React, { useEffect, useState } from 'react';
+import { Compass, CheckCircle2, ArrowRight, Sparkles } from 'lucide-react';
 
-export function AnalysisScreen({ onComplete }) {
-  const [analysisStep, setAnalysisStep] = useState(1); // 1, 2, 3, 4
+const ANALYSIS_STEPS = [
+  { label: 'Understanding your interests', delay: 400 },
+  { label: 'Identifying your strengths', delay: 1100 },
+  { label: 'Finding your best direction', delay: 1900 }
+];
+
+export default function AnalysisScreen({ onComplete }) {
+  const [completedSteps, setCompletedSteps] = useState([0]);
+  const [progress, setProgress] = useState(25);
 
   useEffect(() => {
-    // Smooth step progression across the 4 stages
-    const timer1 = setTimeout(() => setAnalysisStep(2), 600);
-    const timer2 = setTimeout(() => setAnalysisStep(3), 1200);
-    const timer3 = setTimeout(() => setAnalysisStep(4), 1800);
-    const timer4 = setTimeout(() => {
+    const t1 = setTimeout(() => {
+      setCompletedSteps([0, 1]);
+      setProgress(65);
+    }, 900);
+
+    const t2 = setTimeout(() => {
+      setCompletedSteps([0, 1, 2]);
+      setProgress(100);
+    }, 1800);
+
+    const t3 = setTimeout(() => {
       onComplete();
     }, 2500);
 
     return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-      clearTimeout(timer3);
-      clearTimeout(timer4);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
     };
   }, [onComplete]);
 
   return (
-    <div className="analysis-page-container animate-fade-in">
+    <div className="analysis-page-container">
       <div className="analysis-card">
-        {/* Animated AI Pulse Avatar */}
+        {/* Animated Compass Orbit Icon */}
         <div className="analysis-ai-avatar">
           <div className="avatar-pulse-ring"></div>
           <div className="avatar-core">
-            <Sparkles size={32} className="ai-sparkle-icon" />
+            <Compass size={32} className="spin-slow" />
           </div>
         </div>
 
-        {/* Headings */}
+        {/* Direction Analysis Heading */}
         <div className="analysis-text-header">
-          <h1 className="analysis-title">Your career profile just got smarter.</h1>
+          <h2 className="analysis-title">Finding your direction...</h2>
           <p className="analysis-subtitle">
-            We combined your interests, strengths and real-world choices to refine your career matches.
+            LUNARC Compass is connecting your interests, strengths and preferences to possible career paths.
           </p>
         </div>
 
-        {/* 4-Step Process Indicator */}
+        {/* Animated 3-Step Checklist */}
         <div className="analysis-steps-list">
-          {/* Step 1 */}
-          <div className={`analysis-step-item ${analysisStep >= 1 ? "active" : ""}`}>
-            <div className={`step-status-icon ${analysisStep > 1 ? "completed" : "in-progress"}`}>
-              {analysisStep > 1 ? (
-                <Check size={16} />
-              ) : (
-                <Loader2 size={16} className="spin-icon" />
-              )}
-            </div>
-            <span className="step-label">Interests analyzed</span>
-          </div>
+          {ANALYSIS_STEPS.map((step, index) => {
+            const isDone = completedSteps.includes(index);
+            const isCurrent = completedSteps.length - 1 === index && progress < 100;
 
-          {/* Step 2 */}
-          <div className={`analysis-step-item ${analysisStep >= 2 ? "active" : "pending"}`}>
-            <div className={`step-status-icon ${analysisStep > 2 ? "completed" : analysisStep === 2 ? "in-progress" : "waiting"}`}>
-              {analysisStep > 2 ? (
-                <Check size={16} />
-              ) : analysisStep === 2 ? (
-                <Loader2 size={16} className="spin-icon" />
-              ) : (
-                <span className="dot-wait"></span>
-              )}
-            </div>
-            <span className="step-label">Strengths analyzed</span>
-          </div>
-
-          {/* Step 3 */}
-          <div className={`analysis-step-item ${analysisStep >= 3 ? "active" : "pending"}`}>
-            <div className={`step-status-icon ${analysisStep > 3 ? "completed" : analysisStep === 3 ? "in-progress" : "waiting"}`}>
-              {analysisStep > 3 ? (
-                <Check size={16} />
-              ) : analysisStep === 3 ? (
-                <Loader2 size={16} className="spin-icon" />
-              ) : (
-                <span className="dot-wait"></span>
-              )}
-            </div>
-            <span className="step-label">Scenario behavior analyzed</span>
-          </div>
-
-          {/* Step 4 */}
-          <div className={`analysis-step-item ${analysisStep >= 4 ? "active" : "pending"}`}>
-            <div className={`step-status-icon ${analysisStep >= 4 ? "in-progress" : "waiting"}`}>
-              {analysisStep >= 4 ? (
-                <Loader2 size={16} className="spin-icon" />
-              ) : (
-                <span className="dot-wait"></span>
-              )}
-            </div>
-            <span className="step-label">Career compatibility calculated</span>
-          </div>
+            return (
+              <div
+                key={index}
+                className={`analysis-step-item ${isDone ? 'active' : ''}`}
+              >
+                <div className={`step-status-icon ${isDone ? 'completed' : isCurrent ? 'in-progress' : 'pending'}`}>
+                  {isDone ? (
+                    <CheckCircle2 size={16} />
+                  ) : isCurrent ? (
+                    <Compass size={14} className="spin-icon" />
+                  ) : (
+                    <span className="dot-wait"></span>
+                  )}
+                </div>
+                <span className="step-label">{step.label}</span>
+              </div>
+            );
+          })}
         </div>
 
-        {/* Shimmer Progress Track */}
+        {/* Progress Bar */}
         <div className="analysis-progress-track">
           <div
             className="analysis-progress-bar"
-            style={{
-              width:
-                analysisStep === 1
-                  ? "25%"
-                  : analysisStep === 2
-                  ? "50%"
-                  : analysisStep === 3
-                  ? "75%"
-                  : "100%"
-            }}
-          />
+            style={{ width: `${progress}%` }}
+          ></div>
         </div>
 
-        {/* Optional Skip Button */}
         <button className="skip-analysis-btn" onClick={onComplete}>
-          <span>View matches immediately</span>
+          <span>View Matches Directly</span>
           <ArrowRight size={14} />
         </button>
       </div>

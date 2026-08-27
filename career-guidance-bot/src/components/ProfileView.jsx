@@ -1,157 +1,152 @@
-import React from "react";
-import { User, Heart, Award, Sparkles, Check, ArrowRight, RotateCcw, Brain } from "lucide-react";
-import { generateProfileSummary, DISCOVERY_QUESTIONS } from "../data/careerData";
+import React from 'react';
+import { User, Sparkles, Compass, Target, RefreshCw, CheckCircle2, ArrowRight, BookOpen, Layers } from 'lucide-react';
+import { generateProfileSummary, DISCOVERY_QUESTIONS } from '../data/careerData';
 
-export function ProfileView({ userAnswers, activeTab = "interests", onRetake, onExploreCareer, matches = [] }) {
+export default function ProfileView({ userAnswers, onRetakeDiscovery, onNavigateToResults }) {
   const profileSummary = generateProfileSummary(userAnswers);
 
-  // Map user answers to full objects
-  const qInterests = DISCOVERY_QUESTIONS[0].options.filter(o => (userAnswers.interests || []).includes(o.id));
-  const qStrengths = DISCOVERY_QUESTIONS[1].options.filter(o => (userAnswers.strengths || []).includes(o.id));
-  const qSubjects = DISCOVERY_QUESTIONS[2].options.filter(o => (userAnswers.subjects || []).includes(o.id));
-  const qWork = DISCOVERY_QUESTIONS[3].options.filter(o => (userAnswers.workPreferences || []).includes(o.id));
+  const getAnswersForCategory = (categoryId) => {
+    const question = DISCOVERY_QUESTIONS.find(q => q.id === categoryId);
+    if (!question) return [];
+    const selectedIds = userAnswers[categoryId] || [];
+    return question.options.filter(opt => selectedIds.includes(opt.id));
+  };
 
-  // Extract skills across matches
-  const topCareer = matches[0];
-  const allSkills = topCareer ? topCareer.skills : [];
+  const selectedInterests = getAnswersForCategory('interests');
+  const selectedStrengths = getAnswersForCategory('strengths');
+  const selectedSubjects = getAnswersForCategory('subjects');
+  const selectedPreferences = getAnswersForCategory('work_preferences');
 
   return (
-    <div className="profile-page-container animate-fade-in">
-      {/* Header */}
+    <div className="profile-page-container">
+      {/* Profile Header */}
       <div className="profile-header-card">
         <div className="profile-avatar-large">
-          <User size={32} />
+          <Compass size={32} />
         </div>
         <div className="profile-title-group">
           <div className="profile-badge-row">
-            <span className="badge-student">Student Profile</span>
-            <span className="badge-ai-active">Active Discovery</span>
+            <span className="badge-student">
+              <Compass size={12} /> Student Profile
+            </span>
+            <span className="badge-ai-active">● Active Guidance</span>
           </div>
-          <h1>{activeTab === "interests" ? "My Interests & Qualities" : "My Skills & Competencies"}</h1>
-          <p className="profile-summary-line">{profileSummary.persona} • {profileSummary.tags}</p>
+          <h1 className="results-main-title" style={{ fontSize: '2rem' }}>Your Discovery Profile</h1>
+          <p className="profile-summary-line">{profileSummary.tags} · {profileSummary.persona}</p>
         </div>
 
-        <button className="btn-retake-discovery" onClick={onRetake}>
-          <RotateCcw size={15} />
+        <button className="btn-retake-discovery" onClick={onRetakeDiscovery}>
+          <RefreshCw size={14} />
           <span>Retake Discovery</span>
         </button>
       </div>
 
-      {activeTab === "interests" ? (
-        <div className="profile-sections-grid">
-          {/* Interests Category */}
-          <div className="profile-category-card">
-            <div className="category-header">
-              <Heart size={18} className="text-primary" />
-              <h3>Areas of Curiosity</h3>
-            </div>
-            <div className="profile-tags-list">
-              {qInterests.length > 0 ? (
-                qInterests.map(item => (
-                  <div key={item.id} className="profile-item-tag">
-                    <span className="item-tag-title">{item.title}</span>
-                    <span className="item-tag-desc">{item.description}</span>
-                  </div>
-                ))
-              ) : (
-                <p className="empty-state-text">No interests selected yet. Take the discovery questionnaire to customize!</p>
-              )}
-            </div>
+      {/* Grid of Selected Traits */}
+      <div className="profile-sections-grid">
+        {/* Interests */}
+        <div className="profile-category-card">
+          <div className="category-header">
+            <Compass size={18} className="text-primary-600" />
+            <h3>Your Selected Interests</h3>
           </div>
-
-          {/* Strengths Category */}
-          <div className="profile-category-card">
-            <div className="category-header">
-              <Sparkles size={18} className="text-primary" />
-              <h3>Core Strengths</h3>
-            </div>
-            <div className="profile-tags-list">
-              {qStrengths.length > 0 ? (
-                qStrengths.map(item => (
-                  <div key={item.id} className="profile-item-tag">
-                    <span className="item-tag-title">{item.title}</span>
-                    <span className="item-tag-desc">{item.description}</span>
-                  </div>
-                ))
-              ) : (
-                <p className="empty-state-text">Take the discovery questionnaire to reveal your core strengths.</p>
-              )}
-            </div>
-          </div>
-
-          {/* Enjoyed Subjects */}
-          <div className="profile-category-card">
-            <div className="category-header">
-              <Brain size={18} className="text-primary" />
-              <h3>Favorite Subjects</h3>
-            </div>
-            <div className="profile-tags-list">
-              {qSubjects.length > 0 ? (
-                qSubjects.map(item => (
-                  <div key={item.id} className="profile-item-tag">
-                    <span className="item-tag-title">{item.title}</span>
-                    <span className="item-tag-desc">{item.description}</span>
-                  </div>
-                ))
-              ) : (
-                <p className="empty-state-text">Select your favorite subjects during discovery.</p>
-              )}
-            </div>
-          </div>
-
-          {/* Work Preferences */}
-          <div className="profile-category-card">
-            <div className="category-header">
-              <Award size={18} className="text-primary" />
-              <h3>Work Preferences</h3>
-            </div>
-            <div className="profile-tags-list">
-              {qWork.length > 0 ? (
-                qWork.map(item => (
-                  <div key={item.id} className="profile-item-tag">
-                    <span className="item-tag-title">{item.title}</span>
-                    <span className="item-tag-desc">{item.description}</span>
-                  </div>
-                ))
-              ) : (
-                <p className="empty-state-text">Set your work preferences in discovery.</p>
-              )}
-            </div>
-          </div>
-        </div>
-      ) : (
-        /* Skills Tab */
-        <div className="profile-skills-view">
-          <div className="skills-overview-card">
-            <div className="skills-overview-header">
-              <div>
-                <h2>Recommended Skill Focus</h2>
-                <p>Curated competencies based on your top career match: <strong>{topCareer?.title || "Machine Learning Engineer"}</strong></p>
-              </div>
-              {topCareer && (
-                <button className="btn-explore-skills-career" onClick={() => onExploreCareer(topCareer)}>
-                  <span>View Full Roadmap</span>
-                  <ArrowRight size={15} />
-                </button>
-              )}
-            </div>
-
-            <div className="skills-breakdown-grid">
-              {allSkills.map((skill, index) => (
-                <div key={index} className="skill-detail-card">
-                  <div className="skill-card-top">
-                    <h4>{skill.name}</h4>
-                    <span className={`skill-level-badge ${skill.level?.toLowerCase()}`}>
-                      {skill.level}
-                    </span>
-                  </div>
-                  <span className="skill-category-label">{skill.category}</span>
+          <div className="profile-tags-list">
+            {selectedInterests.length > 0 ? (
+              selectedInterests.map(item => (
+                <div key={item.id} className="profile-item-tag">
+                  <span className="item-tag-title">{item.title}</span>
+                  <span className="item-tag-desc">{item.description}</span>
                 </div>
-              ))}
-            </div>
+              ))
+            ) : (
+              <div className="profile-item-tag">
+                <span className="item-tag-title">Technology & AI</span>
+                <span className="item-tag-desc">Coding, AI & building intelligent systems</span>
+              </div>
+            )}
           </div>
         </div>
-      )}
+
+        {/* Strengths */}
+        <div className="profile-category-card">
+          <div className="category-header">
+            <Target size={18} className="text-mint-600" />
+            <h3>Your Core Strengths</h3>
+          </div>
+          <div className="profile-tags-list">
+            {selectedStrengths.length > 0 ? (
+              selectedStrengths.map(item => (
+                <div key={item.id} className="profile-item-tag">
+                  <span className="item-tag-title">{item.title}</span>
+                  <span className="item-tag-desc">{item.description}</span>
+                </div>
+              ))
+            ) : (
+              <div className="profile-item-tag">
+                <span className="item-tag-title">Analytical Thinking</span>
+                <span className="item-tag-desc">Structured reasoning and data-driven problem solving</span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Favorite Subjects */}
+        <div className="profile-category-card">
+          <div className="category-header">
+            <BookOpen size={18} className="text-secondary-600" />
+            <h3>Favorite Academic Subjects</h3>
+          </div>
+          <div className="profile-tags-list">
+            {selectedSubjects.length > 0 ? (
+              selectedSubjects.map(item => (
+                <div key={item.id} className="profile-item-tag">
+                  <span className="item-tag-title">{item.title}</span>
+                  <span className="item-tag-desc">{item.description}</span>
+                </div>
+              ))
+            ) : (
+              <div className="profile-item-tag">
+                <span className="item-tag-title">Mathematics & Computer Science</span>
+                <span className="item-tag-desc">Quantitative modeling and software engineering</span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Work Preferences */}
+        <div className="profile-category-card">
+          <div className="category-header">
+            <Sparkles size={18} className="text-primary-600" />
+            <h3>Impact & Work Style</h3>
+          </div>
+          <div className="profile-tags-list">
+            {selectedPreferences.length > 0 ? (
+              selectedPreferences.map(item => (
+                <div key={item.id} className="profile-item-tag">
+                  <span className="item-tag-title">{item.title}</span>
+                  <span className="item-tag-desc">{item.description}</span>
+                </div>
+              ))
+            ) : (
+              <div className="profile-item-tag">
+                <span className="item-tag-title">Building Technology & AI</span>
+                <span className="item-tag-desc">Developing scalable algorithms and software products</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Action Footer */}
+      <div className="thirty-day-footer-strip">
+        <div className="footer-left-info">
+          <Compass size={18} className="text-primary-600" />
+          <span>Ready to see your recommended career direction?</span>
+        </div>
+        <button className="btn-primary-large" style={{ padding: '10px 24px', fontSize: '0.92rem' }} onClick={onNavigateToResults}>
+          <span>View Career Matches</span>
+          <ArrowRight size={16} />
+        </button>
+      </div>
     </div>
   );
 }

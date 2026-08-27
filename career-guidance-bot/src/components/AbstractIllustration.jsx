@@ -1,146 +1,141 @@
-import React from "react";
+import React from 'react';
 
-export function AbstractIllustration() {
+export default function AbstractIllustration() {
   return (
     <div className="hero-illustration-container">
       <svg
+        className="hero-svg"
         viewBox="0 0 520 440"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="hero-svg animate-float"
       >
         <defs>
-          {/* Gradients */}
-          <linearGradient id="grad-lavender" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#F5F3FF" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#EDE9FE" stopOpacity="0.7" />
+          {/* Subtle Gradients */}
+          <linearGradient id="compassBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FAF8FF" />
+            <stop offset="100%" stopColor="#F5F3FF" />
           </linearGradient>
 
-          <linearGradient id="grad-blue" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#EEF2FF" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="#E0E7FF" stopOpacity="0.6" />
+          <linearGradient id="purplePathGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#C4B5FD" />
+            <stop offset="100%" stopColor="#7C3AED" />
           </linearGradient>
 
-          <linearGradient id="grad-mint" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#ECFDF5" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#D1FAE5" stopOpacity="0.6" />
+          <linearGradient id="bluePathGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#93C5FD" />
+            <stop offset="100%" stopColor="#4F46E5" />
           </linearGradient>
 
-          <linearGradient id="line-grad-1" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#A855F7" stopOpacity="0.6" />
-            <stop offset="50%" stopColor="#6366F1" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="#10B981" stopOpacity="0.7" />
+          <linearGradient id="mintPathGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#6EE7B7" />
+            <stop offset="100%" stopColor="#10B981" />
           </linearGradient>
 
-          <linearGradient id="line-grad-2" x1="0%" y1="100%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#818CF8" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#C084FC" stopOpacity="0.8" />
+          <linearGradient id="needleNorth" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#7C3AED" />
+            <stop offset="100%" stopColor="#6366F1" />
           </linearGradient>
 
-          <filter id="soft-glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="16" result="blur" />
+          <linearGradient id="needleSouth" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#E2E8F0" />
+            <stop offset="100%" stopColor="#CBD5E1" />
+          </linearGradient>
+
+          <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="12" result="blur" />
             <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
-
-          <filter id="card-shadow" x="-10%" y="-10%" width="125%" height="125%">
-            <feDropShadow dx="0" dy="8" stdDeviation="12" floodColor="#7C3AED" floodOpacity="0.08" />
           </filter>
         </defs>
 
-        {/* Ambient Soft Glowing Background Orbs */}
-        <circle cx="260" cy="220" r="150" fill="url(#grad-lavender)" filter="url(#soft-glow)" opacity="0.8" />
-        <circle cx="360" cy="160" r="100" fill="url(#grad-blue)" filter="url(#soft-glow)" opacity="0.6" />
-        <circle cx="160" cy="290" r="90" fill="url(#grad-mint)" filter="url(#soft-glow)" opacity="0.7" />
+        {/* Outer Orbit Rings */}
+        <circle cx="260" cy="220" r="180" stroke="#EDE9FE" strokeWidth="1.5" strokeDasharray="6 6" />
+        <circle cx="260" cy="220" r="130" stroke="#E0E7FF" strokeWidth="1.5" />
+        <circle cx="260" cy="220" r="80" stroke="#F3F4F6" strokeWidth="1" />
 
-        {/* Minimal Orbital Rings (Personal Growth & Career Horizon) */}
-        <circle cx="260" cy="220" r="170" stroke="#DDD6FE" strokeWidth="1.5" strokeDasharray="6 6" opacity="0.5" />
-        <circle cx="260" cy="220" r="115" stroke="#C7D2FE" strokeWidth="1.5" opacity="0.6" />
-        <circle cx="260" cy="220" r="60" stroke="#A7F3D0" strokeWidth="1.5" strokeDasharray="4 4" opacity="0.7" />
-
-        {/* Dynamic Trajectory Paths (Branching Career Pathways) */}
+        {/* Converging Path Lines (You are here -> Explore -> Discover -> Your Direction) */}
+        {/* Path 1: Top-Left (Interests) */}
         <path
-          d="M 120 330 C 180 320, 210 260, 260 220 C 310 180, 360 130, 420 100"
-          stroke="url(#line-grad-1)"
-          strokeWidth="3"
-          strokeLinecap="round"
-          fill="none"
-        />
-        <path
-          d="M 100 240 C 170 240, 210 220, 260 220 C 320 220, 370 280, 430 310"
-          stroke="url(#line-grad-2)"
+          d="M 70 80 Q 150 120 260 220"
+          stroke="url(#purplePathGrad)"
           strokeWidth="2.5"
           strokeLinecap="round"
-          strokeDasharray="5 5"
-          fill="none"
+          strokeDasharray="4 4"
         />
+        {/* Path 2: Bottom-Left (Strengths) */}
         <path
-          d="M 260 220 C 290 150, 340 90, 390 60"
-          stroke="#34D399"
+          d="M 60 350 Q 160 300 260 220"
+          stroke="url(#bluePathGrad)"
           strokeWidth="2.5"
           strokeLinecap="round"
-          fill="none"
-          opacity="0.8"
+          strokeDasharray="4 4"
+        />
+        {/* Path 3: Top-Right (Skills) */}
+        <path
+          d="M 450 90 Q 380 150 260 220"
+          stroke="url(#mintPathGrad)"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+        {/* Path 4: Bottom-Right (Roadmap) */}
+        <path
+          d="M 440 340 Q 360 280 260 220"
+          stroke="url(#purplePathGrad)"
+          strokeWidth="2"
+          strokeLinecap="round"
         />
 
-        {/* Central Intelligence Core (Compass & AI Node) */}
-        <g transform="translate(260, 220)">
-          <circle r="32" fill="#FFFFFF" filter="url(#card-shadow)" />
-          <circle r="26" fill="#7C3AED" />
-          {/* Compass Sparkle Icon */}
-          <path
-            d="M 0 -12 L 3 -3 L 12 0 L 3 3 L 0 12 L -3 3 L -12 0 L -3 -3 Z"
-            fill="#FFFFFF"
-          />
-          <circle r="3" fill="#D1FAE5" />
+        {/* Central Compass Base Plate */}
+        <circle cx="260" cy="220" r="72" fill="url(#compassBgGrad)" stroke="#DDD6FE" strokeWidth="2" />
+        <circle cx="260" cy="220" r="62" fill="white" stroke="#F1F1F7" strokeWidth="1.5" />
+
+        {/* Compass Dial Cardinal Ticks */}
+        <line x1="260" y1="162" x2="260" y2="170" stroke="#7C3AED" strokeWidth="2.5" strokeLinecap="round" />
+        <line x1="260" y1="270" x2="260" y2="278" stroke="#94A3B8" strokeWidth="2" strokeLinecap="round" />
+        <line x1="202" y1="220" x2="210" y2="220" stroke="#94A3B8" strokeWidth="2" strokeLinecap="round" />
+        <line x1="310" y1="220" x2="318" y2="220" stroke="#94A3B8" strokeWidth="2" strokeLinecap="round" />
+
+        {/* Compass Needle */}
+        <polygon points="260,172 268,220 260,214 252,220" fill="url(#needleNorth)" />
+        <polygon points="260,268 268,220 260,214 252,220" fill="url(#needleSouth)" />
+
+        {/* Center Spark / Pivot */}
+        <circle cx="260" cy="220" r="7" fill="#7C3AED" />
+        <circle cx="260" cy="220" r="3" fill="white" />
+
+        {/* Milestone Node 1: "You Are Here" */}
+        <g transform="translate(60, 65)">
+          <rect width="112" height="32" rx="16" fill="white" stroke="#DDD6FE" strokeWidth="1.5" />
+          <circle cx="16" cy="16" r="6" fill="#7C3AED" />
+          <text x="30" y="20" fill="#0F172A" fontSize="11" fontWeight="700" fontFamily="Inter, sans-serif">You Are Here</text>
         </g>
 
-        {/* Trajectory Milestone Nodes */}
-        {/* Node 1: Discovery (Bottom Left) */}
-        <g transform="translate(120, 330)">
-          <circle r="12" fill="#FFFFFF" stroke="#8B5CF6" strokeWidth="2" filter="url(#card-shadow)" />
-          <circle r="5" fill="#8B5CF6" />
+        {/* Milestone Node 2: "Explore" */}
+        <g transform="translate(48, 335)">
+          <rect width="102" height="32" rx="16" fill="white" stroke="#BFDBFE" strokeWidth="1.5" />
+          <circle cx="16" cy="16" r="6" fill="#4F46E5" />
+          <text x="30" y="20" fill="#0F172A" fontSize="11" fontWeight="700" fontFamily="Inter, sans-serif">Explore</text>
         </g>
 
-        {/* Node 2: Skill Growth (Center-Left) */}
-        <g transform="translate(190, 255)">
-          <circle r="8" fill="#FFFFFF" stroke="#4F46E5" strokeWidth="2" />
-          <circle r="3" fill="#4F46E5" />
+        {/* Milestone Node 3: "Discover" */}
+        <g transform="translate(370, 75)">
+          <rect width="106" height="32" rx="16" fill="white" stroke="#A7F3D0" strokeWidth="1.5" />
+          <circle cx="16" cy="16" r="6" fill="#10B981" />
+          <text x="30" y="20" fill="#0F172A" fontSize="11" fontWeight="700" fontFamily="Inter, sans-serif">Discover</text>
         </g>
 
-        {/* Node 3: Specialization (Top-Right High Target) */}
-        <g transform="translate(420, 100)">
-          <circle r="16" fill="#FFFFFF" stroke="#10B981" strokeWidth="2" filter="url(#card-shadow)" />
-          <circle r="7" fill="#10B981" />
+        {/* Destination Node: "Your Direction" */}
+        <g transform="translate(355, 325)">
+          <rect width="128" height="36" rx="18" fill="#F5F3FF" stroke="#7C3AED" strokeWidth="1.5" />
+          <polygon points="370,343 376,339 376,347" fill="#7C3AED" />
+          <text x="24" y="22" fill="#7C3AED" fontSize="11" fontWeight="800" fontFamily="Inter, sans-serif">Your Direction →</text>
         </g>
 
-        {/* Node 4: Secondary Pathway (Bottom-Right) */}
-        <g transform="translate(430, 310)">
-          <circle r="10" fill="#FFFFFF" stroke="#818CF8" strokeWidth="2" />
-          <circle r="4" fill="#818CF8" />
+        {/* Subtle AI Sparkles */}
+        <g transform="translate(290, 150)">
+          <path d="M 0 -6 Q 0 0 6 0 Q 0 0 0 6 Q 0 0 -6 0 Q 0 0 0 -6 Z" fill="#7C3AED" opacity="0.85" />
         </g>
-
-        {/* Floating Minimal Glass Cards */}
-        {/* Card 1: Match Score Badge */}
-        <g transform="translate(340, 75)" filter="url(#card-shadow)">
-          <rect width="130" height="42" rx="21" fill="#FFFFFF" stroke="#DDD6FE" strokeWidth="1" />
-          <circle cx="22" cy="21" r="9" fill="#D1FAE5" />
-          <path d="M 18 21 L 21 24 L 27 18" stroke="#059669" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-          <text x="38" y="25" fill="#0F172A" fontFamily="Plus Jakarta Sans, sans-serif" fontSize="12" fontWeight="700">94% Match</text>
-        </g>
-
-        {/* Card 2: AI Roadmap Step */}
-        <g transform="translate(60, 190)" filter="url(#card-shadow)">
-          <rect width="140" height="42" rx="21" fill="#FFFFFF" stroke="#E0E7FF" strokeWidth="1" />
-          <circle cx="22" cy="21" r="9" fill="#EDE9FE" />
-          <path d="M 22 15 L 24 19 L 28 20 L 25 23 L 26 27 L 22 25 L 18 27 L 19 23 L 16 20 L 20 19 Z" fill="#7C3AED" transform="scale(0.55) translate(18, 16)" />
-          <text x="40" y="25" fill="#475569" fontFamily="Inter, sans-serif" fontSize="12" fontWeight="600">Personalized</text>
-        </g>
-
-        {/* Card 3: Skills Indicator */}
-        <g transform="translate(310, 330)" filter="url(#card-shadow)">
-          <rect width="135" height="40" rx="20" fill="#FFFFFF" stroke="#E2E8F0" strokeWidth="1" />
-          <circle cx="20" cy="20" r="5" fill="#6366F1" />
-          <text x="36" y="24" fill="#334155" fontFamily="Inter, sans-serif" fontSize="11" fontWeight="600">Tailored Roadmap</text>
+        <g transform="translate(225, 290)">
+          <path d="M 0 -5 Q 0 0 5 0 Q 0 0 0 5 Q 0 0 -5 0 Q 0 0 0 -5 Z" fill="#10B981" opacity="0.8" />
         </g>
       </svg>
     </div>
