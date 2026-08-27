@@ -1,17 +1,16 @@
-import React, { useState, useMemo } from "react";
-import { Sidebar } from "./components/Sidebar";
-import { WelcomeScreen } from "./components/WelcomeScreen";
-import { DiscoveryScreen } from "./components/DiscoveryScreen";
-import { SimulationIntroScreen } from "./components/SimulationIntroScreen";
-import { SimulationScreen } from "./components/SimulationScreen";
-import { AnalysisScreen } from "./components/AnalysisScreen";
-import { ResultsScreen } from "./components/ResultsScreen";
+import Sidebar from "./components/Sidebar";
+import WelcomeScreen from "./components/WelcomeScreen";
+import DiscoveryScreen from "./components/DiscoveryScreen";
+import SimulationIntroScreen from "./components/SimulationIntroScreen";
+import SimulationScreen from "./components/SimulationScreen";
+import AnalysisScreen from "./components/AnalysisScreen";
+import ResultsScreen from "./components/ResultsScreen";
 import { CareerDetailScreen } from "./components/CareerDetailScreen";
-import { ThirtyDayRoadmapScreen } from "./components/ThirtyDayRoadmapScreen";
-import { AIAssistantDrawer } from "./components/AIAssistantDrawer";
+import ThirtyDayRoadmapScreen from "./components/ThirtyDayRoadmapScreen";
+import AIAssistantDrawer from "./components/AIAssistantDrawer";
 import { ComparisonModal } from "./components/ComparisonModal";
 import { HowItWorksModal, AboutModal } from "./components/InfoModals";
-import { ProfileView } from "./components/ProfileView";
+import ProfileView from "./components/ProfileView";
 import {
   CAREER_DATABASE,
   DISCOVERY_QUESTIONS,
