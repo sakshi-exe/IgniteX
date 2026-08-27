@@ -1,12 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Sparkles, MessageSquare, X, Send, Bot, User, ArrowRight, CornerDownLeft } from "lucide-react";
+import { Sparkles, X, Send, User } from "lucide-react";
 import { AI_KNOWLEDGE_BASE } from "../data/careerData";
 
-export function AIAssistantDrawer({ isOpen, onToggle, activeCareer, userAnswers }) {
+export function AIAssistantDrawer({
+  isOpen,
+  onToggle,
+  activeCareer,
+  userAnswers,
+  simulationAnswers = {}
+}) {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      text: "Hi! I'm CareerPilot AI. 👋 Ask me anything about skills, learning roadmaps, overcoming weaknesses, or comparing careers!",
+      text: "Hi! I'm CareerPilot AI. 👋 I've analyzed your questionnaire, your simulation choices, and your skill gaps. Ask me anything about your 30-day plan, math requirements, or career comparison!",
       timestamp: "Just now"
     }
   ]);
@@ -15,11 +21,11 @@ export function AIAssistantDrawer({ isOpen, onToggle, activeCareer, userAnswers 
   const messagesEndRef = useRef(null);
 
   const quickPrompts = [
-    "I'm weak at maths. Can I still choose this career?",
-    "What should I learn first?",
-    "Recommend courses",
-    "Compare careers",
-    "Show beginner roadmap"
+    "I'm weak at maths. Should I still choose ML?",
+    "What should I learn first in Week 1?",
+    "Recommend SQL resources",
+    "Compare with Data Science",
+    "Show my 30-day milestones"
   ];
 
   const scrollToBottom = () => {
@@ -47,30 +53,24 @@ export function AIAssistantDrawer({ isOpen, onToggle, activeCareer, userAnswers 
     setInputValue("");
     setIsTyping(true);
 
-    // Formulate response based on knowledge base & context
     setTimeout(() => {
       let botResponse = "";
       const lowerQuery = query.toLowerCase();
 
-      if (lowerQuery.includes("math") || lowerQuery.includes("calculus") || lowerQuery.includes("weak")) {
+      if (lowerQuery.includes("math") || lowerQuery.includes("maths") || lowerQuery.includes("weak")) {
         botResponse = AI_KNOWLEDGE_BASE.math_question.response;
-      } else if (lowerQuery.includes("learn first") || lowerQuery.includes("first step") || lowerQuery.includes("start")) {
-        botResponse = activeCareer
-          ? `For **${activeCareer.title}**, start with **Step 1: ${activeCareer.roadmap[0].focus}**! Spend 2–3 weeks building core fundamentals before diving into complex tooling.`
-          : AI_KNOWLEDGE_BASE.first_step.response;
-      } else if (lowerQuery.includes("course") || lowerQuery.includes("resource") || lowerQuery.includes("free")) {
+      } else if (lowerQuery.includes("week 1") || lowerQuery.includes("learn first") || lowerQuery.includes("start")) {
+        botResponse = AI_KNOWLEDGE_BASE.first_step.response;
+      } else if (lowerQuery.includes("course") || lowerQuery.includes("resource") || lowerQuery.includes("sql")) {
         botResponse = AI_KNOWLEDGE_BASE.courses.response;
-      } else if (lowerQuery.includes("compare") || lowerQuery.includes("vs")) {
+      } else if (lowerQuery.includes("compare") || lowerQuery.includes("data science")) {
         botResponse = AI_KNOWLEDGE_BASE.compare.response;
-      } else if (lowerQuery.includes("roadmap") || lowerQuery.includes("timeline")) {
-        botResponse = activeCareer
-          ? `Your personalized roadmap for **${activeCareer.title}** has 5 structured phases spanning ~16–20 weeks. Check the right column on the career page to view each step!`
-          : AI_KNOWLEDGE_BASE.default_roadmap.response;
+      } else if (lowerQuery.includes("30") || lowerQuery.includes("roadmap") || lowerQuery.includes("milestone")) {
+        botResponse = AI_KNOWLEDGE_BASE.default_roadmap.response;
       } else {
-        // Context-aware dynamic reply
-        botResponse = `Great question! Based on your curiosity in **${
-          activeCareer ? activeCareer.title : "tech and problem solving"
-        }**, the most important thing is consistent hands-on practice. Focus on building small projects that solve real problems and keep iterating on your roadmap step-by-step.`;
+        botResponse = `Great question! Based on your simulation results and focus on **${
+          activeCareer ? activeCareer.title : "Machine Learning Engineer"
+        }**, your top priority this month is mastering Python and basic SQL. Would you like resource recommendations or project ideas?`;
       }
 
       const botMsg = {
@@ -98,7 +98,7 @@ export function AIAssistantDrawer({ isOpen, onToggle, activeCareer, userAnswers 
         <span className="floating-btn-text">Ask CareerPilot</span>
       </button>
 
-      {/* Floating Chat Drawer / Popover Panel */}
+      {/* Floating Chat Drawer Panel */}
       {isOpen && (
         <div className="ai-chat-drawer animate-fade-in">
           {/* Drawer Header */}
@@ -146,7 +146,7 @@ export function AIAssistantDrawer({ isOpen, onToggle, activeCareer, userAnswers 
 
                 <div className="message-content-wrapper">
                   <div className="message-bubble">
-                    <p>{msg.text}</p>
+                    <p style={{ whiteSpace: "pre-line" }}>{msg.text}</p>
                   </div>
                   <span className="message-time">{msg.timestamp}</span>
                 </div>
@@ -182,7 +182,7 @@ export function AIAssistantDrawer({ isOpen, onToggle, activeCareer, userAnswers 
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Ask about careers, skills, roadmaps..."
+                placeholder="Ask about your 30-day plan, skills, math..."
                 className="drawer-input-field"
               />
               <button

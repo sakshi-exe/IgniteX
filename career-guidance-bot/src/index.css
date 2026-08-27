@@ -4,90 +4,105 @@
    ========================================================================== */
 
 :root {
-  /* Primary Soft Lavender / Pastel Purple */
-  --primary-50: #FAF5FF;
-  --primary-100: #F3E8FF;
-  --primary-200: #E9D5FF;
-  --primary-300: #D8B4FE;
-  --primary-400: #C084FC;
-  --primary-500: #A855F7;
-  --primary-600: #8B5CF6;
-  --primary-700: #7C3AED;
-  --primary-800: #6D28D9;
-  --primary-light: #F5F3FF;
-  --primary-surface: #EDE9FE;
-  --primary-border: #DDD6FE;
-  
-  /* Secondary Muted Blue */
-  --secondary-50: #EEF2FF;
-  --secondary-100: #E0E7FF;
-  --secondary-200: #C7D2FE;
-  --secondary-400: #818CF8;
-  --secondary-600: #4F46E5;
-  --secondary-700: #4338CA;
-  
-  /* Accent Soft Mint Green */
-  --mint-50: #ECFDF5;
-  --mint-100: #D1FAE5;
-  --mint-200: #A7F3D0;
-  --mint-400: #34D399;
-  --mint-500: #10B981;
-  --mint-600: #059669;
-  --mint-700: #047857;
+  /* Primary — Deep Teal */
+  --primary-50: #EFFAF8;
+  --primary-100: #D9F3EF;
+  --primary-200: #B7E7E0;
+  --primary-300: #83D4C9;
+  --primary-400: #4CBCAE;
+  --primary-500: #249B91;
+  --primary-600: #178078;
+  --primary-700: #146861;
+  --primary-800: #124F4A;
+  --primary-light: #F3FBFA;
+  --primary-surface: #E6F6F3;
+  --primary-border: #C7EAE5;
 
-  /* Supporting Pastel Accents */
-  --peach-50: #FFF7ED;
-  --peach-100: #FFEDD5;
-  --peach-400: #FB923C;
-  --peach-500: #F97316;
+  /* Secondary — Muted Slate Blue */
+  --secondary-50: #F2F6FA;
+  --secondary-100: #E3EBF2;
+  --secondary-200: #C8D7E3;
+  --secondary-400: #66849D;
+  --secondary-600: #36566F;
+  --secondary-700: #29455C;
 
-  --sky-50: #F0F9FF;
-  --sky-100: #E0F2FE;
-  --sky-500: #0EA5E9;
-  
+  /* Accent — Soft Mint/Green */
+  --mint-50: #F1FAF7;
+  --mint-100: #DDF3EC;
+  --mint-200: #B9E5D7;
+  --mint-400: #5BBFA8;
+  --mint-500: #35A58F;
+  --mint-600: #258773;
+  --mint-700: #1C6B5C;
+
+  /* Accent — Warm Coral */
+  --peach-50: #FFF5F2;
+  --peach-100: #FFE5DE;
+  --peach-400: #FF8C78;
+  --peach-500: #F36F5F;
+
+  /* Supporting Accent — Soft Sky */
+  --sky-50: #F1F8FA;
+  --sky-100: #DDEFF3;
+  --sky-500: #4A9CAA;
+
   /* Neutrals & Surfaces */
-  --bg-app: #FAFAFD;
+  --bg-app: #F7F8F6;
   --bg-sidebar: #FFFFFF;
   --bg-card: #FFFFFF;
-  --bg-card-hover: #FCFCFE;
+  --bg-card-hover: #FBFCFA;
   --bg-glass: rgba(255, 255, 255, 0.88);
   --bg-elevated: #FFFFFF;
-  
+
   /* Borders */
-  --border-subtle: #F1F1F7;
-  --border-default: #E6E6F0;
-  --border-strong: #D6D6E5;
-  --border-primary-subtle: #E8E5F8;
-  --border-primary: #8B5CF6;
-  
+  --border-subtle: #ECEFEB;
+  --border-default: #DEE4DF;
+  --border-strong: #CAD3CD;
+  --border-primary-subtle: #D5ECE8;
+  --border-primary: #249B91;
+
   /* Text */
-  --text-primary: #0F172A;
-  --text-secondary: #475569;
-  --text-muted: #64748B;
-  --text-light: #94A3B8;
+  --text-primary: #172321;
+  --text-secondary: #52615E;
+  --text-muted: #71807C;
+  --text-light: #9AA7A3;
   --text-inverse: #FFFFFF;
-  
-  /* Shadows */
-  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
-  --shadow-sm: 0 2px 6px rgba(124, 58, 237, 0.04), 0 1px 3px rgba(15, 23, 42, 0.04);
-  --shadow-md: 0 6px 18px rgba(124, 58, 237, 0.06), 0 2px 6px rgba(15, 23, 42, 0.04);
-  --shadow-lg: 0 12px 32px rgba(124, 58, 237, 0.08), 0 4px 12px rgba(15, 23, 42, 0.05);
-  --shadow-xl: 0 20px 48px rgba(124, 58, 237, 0.12), 0 8px 24px rgba(15, 23, 42, 0.06);
-  --shadow-glow: 0 0 24px rgba(139, 92, 246, 0.25);
-  
-  /* Radii */
+
+  /* Shadows — Neutral, no purple */
+  --shadow-xs: 0 1px 2px rgba(23, 35, 33, 0.04);
+
+  --shadow-sm:
+    0 2px 6px rgba(23, 35, 33, 0.04),
+    0 1px 3px rgba(23, 35, 33, 0.04);
+
+  --shadow-md:
+    0 6px 18px rgba(23, 35, 33, 0.06),
+    0 2px 6px rgba(23, 35, 33, 0.04);
+
+  --shadow-lg:
+    0 12px 32px rgba(23, 35, 33, 0.08),
+    0 4px 12px rgba(23, 35, 33, 0.05);
+
+  --shadow-xl:
+    0 20px 48px rgba(23, 35, 33, 0.12),
+    0 8px 24px rgba(23, 35, 33, 0.06);
+
+  --shadow-glow:
+    0 0 24px rgba(36, 155, 145, 0.22);
+
+  /* Radii — KEEP EXACTLY THE SAME */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-xl: 20px;
   --radius-2xl: 24px;
   --radius-full: 9999px;
-  
-  /* Typography */
+
+  /* Typography — KEEP EXACTLY THE SAME */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-heading: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* Layout */
+  /* Layout — KEEP EXACTLY THE SAME */
   --sidebar-width: 220px;
   --header-height: 64px;
   --max-content-width: 1320px;
@@ -101,7 +116,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
   background-color: var(--bg-app);
@@ -119,7 +135,12 @@ html, body {
 }
 
 /* Headings */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
   color: var(--text-primary);
   font-weight: 700;
@@ -160,7 +181,9 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
   font-family: var(--font-sans);
   outline: none;
 }
@@ -190,6 +213,7 @@ input, textarea, select {
     opacity: 0;
     transform: translateY(8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -197,10 +221,13 @@ input, textarea, select {
 }
 
 @keyframes pulseGlow {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
+
   50% {
     opacity: 0.6;
     transform: scale(1.15);
@@ -208,9 +235,12 @@ input, textarea, select {
 }
 
 @keyframes floatSlow {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px) rotate(0deg);
   }
+
   50% {
     transform: translateY(-8px) rotate(1deg);
   }
@@ -220,6 +250,7 @@ input, textarea, select {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
