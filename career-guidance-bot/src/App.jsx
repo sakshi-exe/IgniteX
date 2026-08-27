@@ -1,152 +1,256 @@
-import { useState } from "react";
+import React, { useState, useMemo } from "react";
+import { Sidebar } from "./components/Sidebar";
+import { WelcomeScreen } from "./components/WelcomeScreen";
+import { DiscoveryScreen } from "./components/DiscoveryScreen";
+import { AnalysisScreen } from "./components/AnalysisScreen";
+import { ResultsScreen } from "./components/ResultsScreen";
+import { CareerDetailScreen } from "./components/CareerDetailScreen";
+import { AIAssistantDrawer } from "./components/AIAssistantDrawer";
+import { ComparisonModal } from "./components/ComparisonModal";
+import { HowItWorksModal, AboutModal } from "./components/InfoModals";
+import { ProfileView } from "./components/ProfileView";
+import { MyRoadmapView } from "./components/MyRoadmapView";
+import {
+  CAREER_DATABASE,
+  DISCOVERY_QUESTIONS,
+  calculateCareerMatches
+} from "./data/careerData";
 import "./App.css";
 
-const questions = [
-  "What subjects or topics do you enjoy the most?",
-  "What are your biggest strengths?",
-  "What kind of work would you enjoy doing?"
-];
+// Initial default answers for seamless first-time discovery and fallbacks
+const INITIAL_ANSWERS = {
+  interests: ["technology", "problem_solving"],
+  strengths: ["analytical_thinking", "problem_solving_strength"],
+  subjects: ["mathematics", "computer_science"],
+  workPreferences: ["building_technology", "analyzing_data"]
+};
 
 function App() {
-  const [messages, setMessages] = useState([
-    {
-      role: "bot",
-      text: "Hey! I'm CareerPilot 👋\nI'll help you discover career paths that actually fit you."
-    },
-    {
-      role: "bot",
-      text: questions[0]
-    }
-  ]);
+  // Navigation View State
+  const [currentView, setCurrentView] = useState("welcome"); // welcome | discovery | analysis | results | career-detail | profile-interests | profile-skills | my-roadmap
+  
+  // Discovery Questionnaire State
+  const [discoveryStep, setDiscoveryStep] = useState(0);
+  const [userAnswers, setUserAnswers] = useState(INITIAL_ANSWERS);
 
-  const [input, setInput] = useState("");
-  const [step, setStep] = useState(0);
+  // Selected Career for Detail View
+  const [selectedCareer, setSelectedCareer] = useState(null);
+  
+  // Saved Careers
+  const [savedCareerIds, setSavedCareerIds] = useState(["ml-engineer"]);
 
-  const sendMessage = () => {
-    if (!input.trim()) return;
+  // Modals & Assistant State
+  const [isAiDrawerOpen, setIsAiDrawerOpen] = useState(false);
+  const [isComparisonOpen, setIsComparisonOpen] = useState(false);
+  const [isHowItWorksOpen, setIsHowItWorksOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
 
-    const userMessage = {
-      role: "user",
-      text: input
-    };
+  // Calculate dynamic matches whenever userAnswers change
+  const matches = useMemo(() => {
+    return calculateCareerMatches(userAnswers);
+  }, [userAnswers]);
 
-    setMessages((prev) => [...prev, userMessage]);
-
-    if (step < questions.length - 1) {
-      setTimeout(() => {
-        setMessages((prev) => [
+  // Handle Option Toggle in Discovery Questionnaire
+  const handleToggleOption = (questionId, optionId, maxSelections) => {
+    setUserAnswers((prev) => {
+      const currentList = prev[questionId] || [];
+      if (currentList.includes(optionId)) {
+        return {
           ...prev,
-          {
-            role: "bot",
-            text: questions[step + 1]
-          }
-        ]);
-        setStep(step + 1);
-      }, 500);
+          [questionId]: currentList.filter((id) => id !== optionId)
+        };
+      } else {
+        if (currentList.length >= maxSelections) {
+          // Replace last selection if max reached
+          return {
+            ...prev,
+            [questionId]: [...currentList.slice(1), optionId]
+          };
+        }
+        return {
+          ...prev,
+          [questionId]: [...currentList, optionId]
+        };
+      }
+    });
+  };
+
+  // Discovery Navigation Handlers
+  const handleStartDiscovery = () => {
+    setDiscoveryStep(0);
+    setCurrentView("discovery");
+  };
+
+  const handleNextStep = () => {
+    if (discoveryStep < DISCOVERY_QUESTIONS.length - 1) {
+      setDiscoveryStep((prev) => prev + 1);
     } else {
-      setTimeout(() => {
-        setMessages((prev) => [
-          ...prev,
-          {
-            role: "bot",
-            text: "Perfect! 🧠 I have enough information to analyze your career profile."
-          },
-          {
-            role: "bot",
-            text: "Your personalized career recommendations will appear here soon."
-          }
-        ]);
-      }, 500);
+      // Transition to AI Analysis Screen
+      setCurrentView("analysis");
     }
-
-    setInput("");
   };
 
-  const quickReply = (text) => {
-    setInput(text);
+  const handleBackStep = () => {
+    if (discoveryStep > 0) {
+      setDiscoveryStep((prev) => prev - 1);
+    } else {
+      setCurrentView("welcome");
+    }
   };
+
+  const handleAnalysisComplete = () => {
+    setCurrentView("results");
+  };
+
+  const handleSelectCareer = (career) => {
+    setSelectedCareer(career);
+    setCurrentView("career-detail");
+  };
+
+  const handleToggleSave = (careerId) => {
+    setSavedCareerIds((prev) =>
+      prev.includes(careerId)
+        ? prev.filter((id) => id !== careerId)
+        : [...prev, careerId]
+    );
+  };
+
+  const handleResetDiscovery = () => {
+    setDiscoveryStep(0);
+    setCurrentView("discovery");
+  };
+
+  // Sidebar navigation handler
+  const handleSidebarNavigate = (view) => {
+    if (view === "advisor") {
+      if (currentView === "career-detail" || currentView === "results" || currentView === "analysis" || currentView === "discovery") {
+        // stay in current flow or welcome
+      } else {
+        setCurrentView("welcome");
+      }
+    } else {
+      setCurrentView(view);
+    }
+  };
+
+  // Active Career fallback (for detail & roadmap view)
+  const activeCareer = selectedCareer || matches[0] || CAREER_DATABASE[0];
 
   return (
-    <div className="app">
-      <header className="header">
-        <div className="logo">
-          <div className="logoIcon">✦</div>
-          <div>
-            <h1>CareerPilot</h1>
-            <span>AI Career Guidance</span>
-          </div>
-        </div>
+    <div className="careerpilot-layout">
+      {/* Minimal Desktop 220px Sidebar */}
+      <Sidebar
+        currentView={currentView}
+        onNavigate={handleSidebarNavigate}
+        onResetDiscovery={handleResetDiscovery}
+        matchesCount={matches.length}
+      />
 
-        <div className="status">
-          <span className="statusDot"></span>
-          AI Online
-        </div>
-      </header>
-
-      <main className="chatContainer">
-        <div className="welcome">
-          <div className="botAvatar">✦</div>
-          <h2>Discover your path.</h2>
-          <p>
-            Tell me about yourself and I'll help you find careers,
-            skills and learning paths that match your strengths.
-          </p>
-        </div>
-
-        <div className="messages">
-          {messages.map((message, index) => (
-            <div
-              key={index}
-              className={`messageRow ${message.role}`}
-            >
-              {message.role === "bot" && (
-                <div className="smallAvatar">✦</div>
-              )}
-
-              <div className="message">
-                {message.text}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {step === 0 && (
-          <div className="quickReplies">
-            <button onClick={() => quickReply("Technology and coding")}>
-              💻 Technology
-            </button>
-            <button onClick={() => quickReply("Design and creativity")}>
-              🎨 Design
-            </button>
-            <button onClick={() => quickReply("Business and leadership")}>
-              📈 Business
-            </button>
-            <button onClick={() => quickReply("Science and research")}>
-              🔬 Science
-            </button>
-          </div>
+      {/* Main Content Workspace Container */}
+      <div className="workspace-main-area">
+        {currentView === "welcome" && (
+          <WelcomeScreen
+            onStartDiscovery={handleStartDiscovery}
+            onOpenHowItWorks={() => setIsHowItWorksOpen(true)}
+            onOpenAbout={() => setIsAboutOpen(true)}
+            onOpenProfile={() => setCurrentView("profile-interests")}
+          />
         )}
 
-        <div className="inputArea">
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") sendMessage();
-            }}
-            placeholder="Tell me about yourself..."
+        {currentView === "discovery" && (
+          <DiscoveryScreen
+            currentStepIndex={discoveryStep}
+            answers={userAnswers}
+            onToggleOption={handleToggleOption}
+            onNext={handleNextStep}
+            onBack={handleBackStep}
           />
+        )}
 
-          <button className="sendButton" onClick={sendMessage}>
-            ↑
-          </button>
-        </div>
+        {currentView === "analysis" && (
+          <AnalysisScreen onComplete={handleAnalysisComplete} />
+        )}
 
-        <p className="disclaimer">
-          CareerPilot provides AI-powered guidance. Explore multiple
-          options before making career decisions.
-        </p>
-      </main>
+        {currentView === "results" && (
+          <ResultsScreen
+            matches={matches}
+            userAnswers={userAnswers}
+            onSelectCareer={handleSelectCareer}
+            onOpenComparison={() => setIsComparisonOpen(true)}
+            onRetake={handleResetDiscovery}
+          />
+        )}
+
+        {currentView === "career-detail" && (
+          <CareerDetailScreen
+            career={activeCareer}
+            onBackToResults={() => setCurrentView("results")}
+            onOpenComparison={() => setIsComparisonOpen(true)}
+            onStartRoadmap={(career) => {
+              setSelectedCareer(career);
+              setCurrentView("my-roadmap");
+            }}
+            isSaved={savedCareerIds.includes(activeCareer.id)}
+            onToggleSave={handleToggleSave}
+          />
+        )}
+
+        {currentView === "profile-interests" && (
+          <ProfileView
+            userAnswers={userAnswers}
+            activeTab="interests"
+            onRetake={handleResetDiscovery}
+            onExploreCareer={handleSelectCareer}
+            matches={matches}
+          />
+        )}
+
+        {currentView === "profile-skills" && (
+          <ProfileView
+            userAnswers={userAnswers}
+            activeTab="skills"
+            onRetake={handleResetDiscovery}
+            onExploreCareer={handleSelectCareer}
+            matches={matches}
+          />
+        )}
+
+        {currentView === "my-roadmap" && (
+          <MyRoadmapView
+            activeCareer={activeCareer}
+            onExploreCareer={handleSelectCareer}
+            onRetake={handleResetDiscovery}
+          />
+        )}
+      </div>
+
+      {/* Floating AI Assistant Drawer */}
+      <AIAssistantDrawer
+        isOpen={isAiDrawerOpen}
+        onToggle={() => setIsAiDrawerOpen((prev) => !prev)}
+        activeCareer={activeCareer}
+        userAnswers={userAnswers}
+      />
+
+      {/* Comparison Modal */}
+      <ComparisonModal
+        isOpen={isComparisonOpen}
+        onClose={() => setIsComparisonOpen(false)}
+        matches={matches}
+        onSelectCareer={handleSelectCareer}
+      />
+
+      {/* How It Works & About Modals */}
+      <HowItWorksModal
+        isOpen={isHowItWorksOpen}
+        onClose={() => setIsHowItWorksOpen(false)}
+        onStartDiscovery={handleStartDiscovery}
+      />
+
+      <AboutModal
+        isOpen={isAboutOpen}
+        onClose={() => setIsAboutOpen(false)}
+      />
     </div>
   );
 }
